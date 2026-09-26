@@ -1,0 +1,42 @@
+iced-kubernetes-the-hard-way
+============================
+
+本仓库是基于以下上游项目的中文母语化学习项目（衍生作品）：
+
+  项目:   Kubernetes The Hard Way
+  作者:   Kelsey Hightower
+  仓库:   https://github.com/kelseyhightower/kubernetes-the-hard-way
+  基线提交: 52eb26dad1a3e9e8083a899bc854421eb4842a73 (52eb26d, 2025-04-09)
+  上游版本: kubernetes v1.32.x / containerd v2.1.x / cni v1.6.x / etcd v3.6.x
+
+许可说明
+--------
+
+本仓库同时包含上游内容与本地新增内容，按内容类型适用不同许可：
+
+1. 上游文档/教程正文（docs/ 下的原文）及其中文翻译（docs/zh/）
+   - 许可: Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+           International (CC BY-NC-SA 4.0)
+   - 网址: https://creativecommons.org/licenses/by-nc-sa/4.0/
+   - 义务: 署名(BY) + 非商业(NC) + 相同方式共享(SA)
+
+2. 上游代码、脚本、配置片段（configs/、units/、ca.conf、downloads-*.txt 等）
+   - 许可: Apache License 2.0
+   - 网址: https://www.apache.org/licenses/LICENSE-2.0
+
+3. 本地新增的个人练习笔记（notes/）及本地编排文件
+   - 版权归本仓库作者所有（除非单独标注）。
+   - 若与上游原文混合，该部分内容仍按 CC BY-NC-SA 4.0 发布以满足 SA 要求。
+
+修改说明
+--------
+
+相对上游基线（52eb26d），本仓库的改动包括：
+
+  - 新增 docs/zh/：上游章节的中文翻译。
+  - 新增 notes/：个人练习笔记。
+  - 新增 reference/：术语表等参考资料。
+  - 重写 README.md 以说明本项目定位。
+  - 其他文件（docs/ 原文、configs/、units/ 等）保持与上游一致。
+
+同步上游：`git fetch upstream` 后对比 `upstream/master` 的改动即可。
