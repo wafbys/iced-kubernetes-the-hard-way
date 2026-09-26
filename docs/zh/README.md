@@ -17,7 +17,7 @@
 
 | # | 上游原文 | 中文译文 | 状态 |
 | --- | --- | --- | --- |
-| 01 | docs/01-prerequisites.md | docs/zh/01-prerequisites.md | ☐ 未开始 |
+| 01 | docs/01-prerequisites.md | docs/zh/01-prerequisites.md | ☑ 已翻译 |
 | 02 | docs/02-jumpbox.md | docs/zh/02-jumpbox.md | ☐ 未开始 |
 | 03 | docs/03-compute-resources.md | docs/zh/03-compute-resources.md | ☐ 未开始 |
 | 04 | docs/04-certificate-authority.md | docs/zh/04-certificate-authority.md | ☐ 未开始 |
