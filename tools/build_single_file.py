@@ -42,23 +42,74 @@ FONT_FILES = [
     ("KingHwaOldSong-GB", "京華老宋体-GB", ["京華老宋体-GB.ttf", "KingHwaOldSong-GB.ttf"], "400", False),
 ]
 
-# 主题：(id, 下拉显示名, CSS 变量覆盖)。claude 为默认（写在 :root 中），覆盖项留空。
+# 主题：(id, 下拉显示名, CSS 变量覆盖)。anthropic 为默认（完整取值写在 :root 中），覆盖项留空。
 THEMES = [
-    ("claude", "Claude · 暖陶土", {}),
-    ("paper", "宣纸 · 水墨", {
-        "sidebar-bg": "linear-gradient(180deg,#EFE7D6,#E8E0CC)",
-        "bg": "#F4EFE3", "bg-soft": "#EAE2D0", "surface": "#FBF8F0",
-        "text": "#201D18", "muted": "#6C6453", "faint": "#948A74",
-        "accent": "#A8341F", "accent-strong": "#8A2A18", "accent-soft": "#EEDFD2", "on-accent": "#FBF8F0",
-        "border": "#DED4BE", "border-strong": "#CCC0A5",
-        "code-bg": "#2A2521", "code-text": "#EDE5D6", "code-inline-fg": "#5A4A38", "code-border": "transparent",
-        "code-control-bg": "rgba(255,255,255,.08)", "code-control-fg": "#EDE5D6",
-        "code-control-border": "rgba(255,255,255,.15)", "code-control-hover": "rgba(255,255,255,.2)",
-        "code-label": "rgba(237,229,214,.42)",
-        "shadow": "0 1px 2px rgba(32,29,24,.05),0 10px 30px rgba(32,29,24,.07)",
-        "quote-text": "#57503F", "heading": "var(--serif)",
+    ("anthropic", "Anthropic · Claude", {}),
+    ("openai", "OpenAI · ChatGPT", {
+        "heading": "var(--sans)",
+        "sidebar-bg": "#F7F7F8",
+        "bg": "#FFFFFF", "bg-soft": "#F7F7F8", "surface": "#FFFFFF",
+        "text": "#0D0D0D", "muted": "#6E6E80", "faint": "#8E8EA0",
+        "accent": "#10A37F", "accent-strong": "#0E8C6D", "accent-soft": "#E6F4F0", "on-accent": "#FFFFFF",
+        "border": "#E5E5E5", "border-strong": "#D0D0D0",
+        "code-bg": "#0D0D0D", "code-text": "#ECECF1", "code-inline-fg": "#0E8C6D", "code-border": "transparent",
+        "code-control-bg": "rgba(255,255,255,.1)", "code-control-fg": "#ECECF1",
+        "code-control-border": "rgba(255,255,255,.18)", "code-control-hover": "rgba(255,255,255,.22)",
+        "code-label": "rgba(236,236,241,.45)",
+        "shadow": "0 1px 2px rgba(13,13,13,.05),0 10px 30px rgba(13,13,13,.06)",
+        "quote-text": "#40414F",
+        "r-xs": "4px", "r-sm": "8px", "r-md": "12px", "r-lg": "14px",
     }),
-    ("github", "GitHub · 简洁白", {
+    ("google", "Google · Material", {
+        "heading": "var(--sans)",
+        "sans": '"Google Sans","Product Sans","Roboto","Inter",var(--cjk),sans-serif',
+        "sidebar-bg": "#F8F9FA",
+        "bg": "#FFFFFF", "bg-soft": "#F1F3F4", "surface": "#FFFFFF",
+        "text": "#202124", "muted": "#5F6368", "faint": "#80868B",
+        "accent": "#1A73E8", "accent-strong": "#1557B0", "accent-soft": "#E8F0FE", "on-accent": "#FFFFFF",
+        "border": "#DADCE0", "border-strong": "#BDC1C6",
+        "code-bg": "#F8F9FA", "code-text": "#202124", "code-inline-fg": "#1967D2", "code-border": "#DADCE0",
+        "code-control-bg": "rgba(32,33,36,.06)", "code-control-fg": "#5F6368",
+        "code-control-border": "rgba(32,33,36,.12)", "code-control-hover": "rgba(32,33,36,.12)",
+        "code-label": "rgba(32,33,36,.45)",
+        "shadow": "0 1px 2px rgba(60,64,67,.1),0 2px 6px rgba(60,64,67,.08)",
+        "quote-text": "#3C4043",
+        "r-xs": "4px", "r-sm": "8px", "r-md": "8px", "r-lg": "12px",
+    }),
+    ("microsoft", "Microsoft · Fluent", {
+        "heading": "var(--sans)",
+        "sans": '"Segoe UI","Inter","Helvetica Neue",Arial,var(--cjk),sans-serif',
+        "sidebar-bg": "#F3F2F1",
+        "bg": "#FFFFFF", "bg-soft": "#F3F2F1", "surface": "#FFFFFF",
+        "text": "#201F1E", "muted": "#605E5C", "faint": "#8A8886",
+        "accent": "#0078D4", "accent-strong": "#005A9E", "accent-soft": "#DEECF9", "on-accent": "#FFFFFF",
+        "border": "#EDEBE9", "border-strong": "#D2D0CE",
+        "code-bg": "#F3F2F1", "code-text": "#201F1E", "code-inline-fg": "#005A9E", "code-border": "#E1DFDD",
+        "code-control-bg": "rgba(32,31,30,.06)", "code-control-fg": "#605E5C",
+        "code-control-border": "rgba(32,31,30,.12)", "code-control-hover": "rgba(32,31,30,.12)",
+        "code-label": "rgba(32,31,30,.45)",
+        "shadow": "0 1.6px 3.6px rgba(0,0,0,.08),0 .3px .9px rgba(0,0,0,.06)",
+        "quote-text": "#323130",
+        "r-xs": "2px", "r-sm": "4px", "r-md": "4px", "r-lg": "6px",
+    }),
+    ("apple", "Apple · HIG", {
+        "heading": "var(--sans)",
+        "sans": '-apple-system,"SF Pro Text","SF Pro Display","Helvetica Neue","Inter",var(--cjk),sans-serif',
+        "sidebar-bg": "linear-gradient(180deg,#F5F5F7,#EFEFF2)",
+        "bg": "#FBFBFD", "bg-soft": "#F5F5F7", "surface": "#FFFFFF",
+        "text": "#1D1D1F", "muted": "#6E6E73", "faint": "#86868B",
+        "accent": "#0071E3", "accent-strong": "#0066CC", "accent-soft": "#E8F2FF", "on-accent": "#FFFFFF",
+        "border": "#D2D2D7", "border-strong": "#C6C6C9",
+        "code-bg": "#1D1D1F", "code-text": "#F5F5F7", "code-inline-fg": "#0066CC", "code-border": "transparent",
+        "code-control-bg": "rgba(255,255,255,.12)", "code-control-fg": "#F5F5F7",
+        "code-control-border": "rgba(255,255,255,.2)", "code-control-hover": "rgba(255,255,255,.24)",
+        "code-label": "rgba(245,245,247,.45)",
+        "shadow": "0 2px 8px rgba(0,0,0,.06),0 12px 32px rgba(0,0,0,.06)",
+        "quote-text": "#424245",
+        "r-xs": "6px", "r-sm": "10px", "r-md": "16px", "r-lg": "20px",
+    }),
+    ("github", "GitHub", {
+        "heading": "var(--sans)",
         "sidebar-bg": "#F6F8FA",
         "bg": "#FFFFFF", "bg-soft": "#F6F8FA", "surface": "#FFFFFF",
         "text": "#1F2328", "muted": "#59636E", "faint": "#818B98",
@@ -69,47 +120,39 @@ THEMES = [
         "code-control-border": "rgba(31,35,40,.12)", "code-control-hover": "rgba(31,35,40,.12)",
         "code-label": "rgba(31,35,40,.45)",
         "shadow": "0 1px 0 rgba(31,35,40,.04),0 3px 6px rgba(140,149,159,.15)",
-        "quote-text": "#59636E", "heading": "var(--sans)",
+        "quote-text": "#59636E",
+        "r-xs": "6px", "r-sm": "6px", "r-md": "6px", "r-lg": "6px",
     }),
-    ("nord", "Nord · 冷蓝", {
-        "sidebar-bg": "linear-gradient(180deg,#E9EDF4,#E1E7F0)",
-        "bg": "#F2F4F8", "bg-soft": "#E5E9F0", "surface": "#FFFFFF",
-        "text": "#2E3440", "muted": "#4C566A", "faint": "#7C88A0",
-        "accent": "#5E81AC", "accent-strong": "#4A6A91", "accent-soft": "#DCE4F0", "on-accent": "#FFFFFF",
-        "border": "#D8DEE9", "border-strong": "#BFC9D9",
-        "code-bg": "#2E3440", "code-text": "#E5E9F0", "code-inline-fg": "#3B4252", "code-border": "transparent",
-        "code-control-bg": "rgba(255,255,255,.1)", "code-control-fg": "#E5E9F0",
+    ("stripe", "Stripe", {
+        "heading": "var(--sans)",
+        "sidebar-bg": "linear-gradient(180deg,#F6F9FC,#EEF3F9)",
+        "bg": "#FFFFFF", "bg-soft": "#F6F9FC", "surface": "#FFFFFF",
+        "text": "#0A2540", "muted": "#425466", "faint": "#697386",
+        "accent": "#635BFF", "accent-strong": "#4F46E5", "accent-soft": "#EFEEFF", "on-accent": "#FFFFFF",
+        "border": "#E6EBF1", "border-strong": "#D6DEE8",
+        "code-bg": "#0A2540", "code-text": "#E6EBF1", "code-inline-fg": "#635BFF", "code-border": "transparent",
+        "code-control-bg": "rgba(255,255,255,.1)", "code-control-fg": "#E6EBF1",
         "code-control-border": "rgba(255,255,255,.18)", "code-control-hover": "rgba(255,255,255,.22)",
-        "code-label": "rgba(229,233,240,.45)",
-        "shadow": "0 1px 2px rgba(46,52,64,.06),0 10px 30px rgba(46,52,64,.08)",
-        "quote-text": "#3B4252", "heading": "var(--sans)",
+        "code-label": "rgba(230,235,241,.45)",
+        "shadow": "0 2px 5px rgba(50,50,93,.08),0 8px 24px rgba(50,50,93,.08)",
+        "quote-text": "#425466",
+        "r-xs": "4px", "r-sm": "8px", "r-md": "10px", "r-lg": "16px",
     }),
-    ("solarized", "Solarized · 米黄", {
-        "sidebar-bg": "linear-gradient(180deg,#F4EEDB,#EDE6D0)",
-        "bg": "#FDF6E3", "bg-soft": "#EEE8D5", "surface": "#FEFBF1",
-        "text": "#586E75", "muted": "#657B83", "faint": "#93A1A1",
-        "accent": "#268BD2", "accent-strong": "#1F6FA8", "accent-soft": "#E2EDF1", "on-accent": "#FDF6E3",
-        "border": "#E6DEC6", "border-strong": "#D3C8A8",
-        "code-bg": "#EEE8D5", "code-text": "#586E75", "code-inline-fg": "#586E75", "code-border": "#D9CFB4",
-        "code-control-bg": "rgba(0,43,54,.06)", "code-control-fg": "#657B83",
-        "code-control-border": "rgba(0,43,54,.14)", "code-control-hover": "rgba(0,43,54,.12)",
-        "code-label": "rgba(88,110,117,.5)",
-        "shadow": "0 1px 2px rgba(0,43,54,.05),0 10px 30px rgba(0,43,54,.06)",
-        "quote-text": "#586E75", "heading": "var(--serif)",
-    }),
-    ("gruvbox-dark", "Gruvbox · 暗色", {
+    ("vercel", "Vercel · 黑白", {
         "color-scheme": "dark",
-        "sidebar-bg": "linear-gradient(180deg,#222222,#1B1B1B)",
-        "bg": "#1D2021", "bg-soft": "#282828", "surface": "#282828",
-        "text": "#EBDBB2", "muted": "#BDAE93", "faint": "#928374",
-        "accent": "#D65D0E", "accent-strong": "#FE8019", "accent-soft": "#3C3836", "on-accent": "#1D2021",
-        "border": "#3C3836", "border-strong": "#504945",
-        "code-bg": "#141414", "code-text": "#EBDBB2", "code-inline-fg": "#FABD2F", "code-border": "#3C3836",
-        "code-control-bg": "rgba(255,255,255,.08)", "code-control-fg": "#EBDBB2",
-        "code-control-border": "rgba(255,255,255,.16)", "code-control-hover": "rgba(255,255,255,.2)",
-        "code-label": "rgba(235,219,178,.42)",
-        "shadow": "0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.4)",
-        "quote-text": "#D5C4A1", "heading": "var(--sans)",
+        "heading": "var(--sans)",
+        "sidebar-bg": "#0A0A0A",
+        "bg": "#000000", "bg-soft": "#0F0F0F", "surface": "#0A0A0A",
+        "text": "#EDEDED", "muted": "#A1A1A1", "faint": "#7A7A7A",
+        "accent": "#FFFFFF", "accent-strong": "#FFFFFF", "accent-soft": "#1A1A1A", "on-accent": "#000000",
+        "border": "#1F1F1F", "border-strong": "#333333",
+        "code-bg": "#000000", "code-text": "#EDEDED", "code-inline-fg": "#FFFFFF", "code-border": "#333333",
+        "code-control-bg": "rgba(255,255,255,.1)", "code-control-fg": "#EDEDED",
+        "code-control-border": "rgba(255,255,255,.2)", "code-control-hover": "rgba(255,255,255,.24)",
+        "code-label": "rgba(237,237,237,.45)",
+        "shadow": "0 1px 2px rgba(0,0,0,.6),0 10px 30px rgba(0,0,0,.6)",
+        "quote-text": "#B5B5B5",
+        "r-xs": "2px", "r-sm": "4px", "r-md": "6px", "r-lg": "8px",
     }),
 ]
 REPO = "https://github.com/wafbys/iced-kubernetes-the-hard-way"
@@ -383,10 +426,12 @@ TEMPLATE = r"""<!DOCTYPE html>
 <style>
 :root{{
   --sidebar:300px;
-  --serif:"Source Serif 4","Source Serif Pro","Source Serif 4 Variable",Georgia,"Times New Roman","KingHwaOldSong-GB","Songti SC","SimSun",serif;
-  --sans:"Inter","Inter Variable","Segoe UI",Roboto,"Helvetica Neue",Arial,"KingHwaOldSong-GB","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
-  --mono:"NewComputerModern Mono 10","New Computer Modern Mono","NewCM10-Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,"Cascadia Code","KingHwaOldSong-GB","Sarasa Mono SC",monospace;
+  --cjk:"KingHwaOldSong-GB","Songti SC","SimSun";
+  --serif:"Source Serif 4","Source Serif Pro","Source Serif 4 Variable",Georgia,"Times New Roman",var(--cjk),serif;
+  --sans:"Inter","Inter Variable","Segoe UI",Roboto,"Helvetica Neue",Arial,var(--cjk),sans-serif;
+  --mono:"NewComputerModern Mono 10","New Computer Modern Mono","NewCM10-Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,"Cascadia Code",var(--cjk),monospace;
   --heading:var(--serif);
+  --r-xs:6px; --r-sm:10px; --r-md:14px; --r-lg:16px;
   --sidebar-bg:linear-gradient(180deg,#F6F2E9,#F0ECE1);
   --bg:#FAF9F5; --bg-soft:#F0EEE6; --surface:#FFFFFF;
   --text:#1F1E1D; --muted:#6B6862; --faint:#918B80;
@@ -406,22 +451,22 @@ html{{scroll-behavior:smooth}}
 body{{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.85;-webkit-font-smoothing:antialiased}}
 a{{color:inherit}}
 code,pre,samp,kbd{{font-family:var(--mono)}}
-:not(pre)>code{{background:var(--bg-soft);border:1px solid var(--border);border-radius:6px;padding:.1em .42em;color:var(--code-inline-fg)}}
+:not(pre)>code{{background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--r-xs);padding:.1em .42em;color:var(--code-inline-fg)}}
 
 /* ---------- 侧栏 ---------- */
 .sidebar{{position:fixed;top:0;bottom:0;left:0;width:var(--sidebar);display:flex;flex-direction:column;background:var(--sidebar-bg);border-right:1px solid var(--border);z-index:40}}
 .brand{{display:flex;gap:12px;align-items:center;padding:22px 20px 14px}}
-.brand-mark{{flex:none;width:40px;height:40px;border-radius:12px;background:var(--accent);color:var(--on-accent);font-weight:700;font-size:13px;display:grid;place-items:center;letter-spacing:.5px;box-shadow:var(--shadow)}}
+.brand-mark{{flex:none;width:40px;height:40px;border-radius:var(--r-md);background:var(--accent);color:var(--on-accent);font-weight:700;font-size:13px;display:grid;place-items:center;letter-spacing:.5px;box-shadow:var(--shadow)}}
 .brand-title{{font-family:var(--heading);font-size:16px;font-weight:600;line-height:1.25}}
 .brand-sub{{font-size:11.5px;color:var(--muted);margin-top:3px;letter-spacing:.3px}}
 .theme-bar{{margin:0 18px 8px;display:flex;align-items:center;gap:8px}}
 .theme-bar label{{font-size:11px;color:var(--faint);letter-spacing:.6px;flex:none}}
-.theme-bar select{{flex:1;min-width:0;padding:7px 10px;border:1px solid var(--border-strong);border-radius:10px;background:var(--surface);color:var(--text);font-family:inherit;font-size:12.5px}}
+.theme-bar select{{flex:1;min-width:0;padding:7px 10px;border:1px solid var(--border-strong);border-radius:var(--r-sm);background:var(--surface);color:var(--text);font-family:inherit;font-size:12.5px}}
 .theme-bar select:focus{{outline:2px solid var(--accent-soft);border-color:var(--accent)}}
-.filter{{margin:0 18px 10px;padding:9px 12px;border:1px solid var(--border-strong);border-radius:10px;background:var(--surface);font-family:inherit;font-size:13px;color:var(--text)}}
+.filter{{margin:0 18px 10px;padding:9px 12px;border:1px solid var(--border-strong);border-radius:var(--r-sm);background:var(--surface);font-family:inherit;font-size:13px;color:var(--text)}}
 .filter:focus{{outline:2px solid var(--accent-soft);border-color:var(--accent)}}
 .toc{{flex:1;overflow-y:auto;padding:4px 12px 18px}}
-.toc a{{display:block;text-decoration:none;color:var(--muted);font-size:13px;line-height:1.45;padding:5px 10px;border-radius:8px}}
+.toc a{{display:block;text-decoration:none;color:var(--muted);font-size:13px;line-height:1.45;padding:5px 10px;border-radius:var(--r-sm)}}
 .toc a:hover{{background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--text)}}
 .toc a.active{{background:var(--accent-soft);color:var(--accent-strong);font-weight:600}}
 .toc .toc-cover{{font-weight:600;color:var(--text);margin:2px 0 6px}}
@@ -443,16 +488,16 @@ code,pre,samp,kbd{{font-family:var(--mono)}}
 .cover h1{{font-family:var(--heading);font-size:clamp(34px,5vw,52px);line-height:1.08;letter-spacing:-.6px;margin:16px 0 12px}}
 .lede{{font-size:17.5px;color:var(--muted);max-width:660px;margin:0}}
 .meta-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:30px 0 10px}}
-.meta-card{{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:13px 16px;box-shadow:var(--shadow)}}
+.meta-card{{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:13px 16px;box-shadow:var(--shadow)}}
 .meta-card dt{{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--faint);margin:0 0 5px}}
 .meta-card dd{{margin:0;font-size:13.5px;line-height:1.6}}
-.callout{{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;color:var(--quote-text);font-size:14px;line-height:1.75}}
+.callout{{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 var(--r-md) var(--r-md) 0;padding:14px 18px;margin:16px 0;color:var(--quote-text);font-size:14px;line-height:1.75}}
 .callout a{{color:var(--accent-strong)}}
-kbd{{font-family:var(--mono);font-size:12px;background:var(--bg-soft);border:1px solid var(--border-strong);border-bottom-width:2px;border-radius:6px;padding:1px 6px}}
+kbd{{font-family:var(--mono);font-size:12px;background:var(--bg-soft);border:1px solid var(--border-strong);border-bottom-width:2px;border-radius:var(--r-xs);padding:1px 6px}}
 
 .chapter{{max-width:840px;padding-top:54px;scroll-margin-top:10px}}
 .chapter-head{{display:flex;align-items:baseline;gap:14px;margin:0 0 4px}}
-.chapter-num{{flex:none;font-family:var(--heading);font-size:14px;font-weight:700;color:var(--on-accent);background:var(--accent);border-radius:9px;padding:5px 11px;letter-spacing:1px}}
+.chapter-num{{flex:none;font-family:var(--heading);font-size:14px;font-weight:700;color:var(--on-accent);background:var(--accent);border-radius:var(--r-sm);padding:5px 11px;letter-spacing:1px}}
 .chapter-head h1{{margin:0;font-family:var(--heading);font-size:clamp(28px,3.6vw,36px);line-height:1.2;letter-spacing:-.4px}}
 .chapter h2{{font-family:var(--heading);font-size:24px;line-height:1.3;margin:2.3em 0 .7em;padding-top:1.3em;border-top:1px solid var(--border)}}
 .chapter h3{{font-family:var(--heading);font-size:19.5px;margin:1.9em 0 .5em}}
@@ -466,24 +511,24 @@ h1,h2,h3,h4{{scroll-margin-top:22px}}
 .chapter li{{margin:.35em 0}}
 .chapter li::marker{{color:var(--accent)}}
 .chapter hr{{border:0;border-top:1px solid var(--border);margin:2em 0}}
-blockquote{{margin:1.2em 0;padding:.75em 1.15em;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;color:var(--quote-text)}}
+blockquote{{margin:1.2em 0;padding:.75em 1.15em;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 var(--r-md) var(--r-md) 0;color:var(--quote-text)}}
 blockquote p{{margin:.3em 0}}
-.chapter code{{font-family:var(--mono);font-size:.85em;background:var(--bg-soft);border:1px solid var(--border);border-radius:6px;padding:.12em .4em;color:var(--code-inline-fg);white-space:nowrap}}
-.chapter pre{{position:relative;background:var(--code-bg);color:var(--code-text);border:1px solid var(--code-border);border-radius:14px;padding:40px 20px 18px;overflow:auto;margin:1.25em 0;box-shadow:var(--shadow);line-height:1.65}}
+.chapter code{{font-family:var(--mono);font-size:.85em;background:var(--bg-soft);border:1px solid var(--border);border-radius:var(--r-xs);padding:.12em .4em;color:var(--code-inline-fg);white-space:nowrap}}
+.chapter pre{{position:relative;background:var(--code-bg);color:var(--code-text);border:1px solid var(--code-border);border-radius:var(--r-lg);padding:40px 20px 18px;overflow:auto;margin:1.25em 0;box-shadow:var(--shadow);line-height:1.65}}
 .chapter pre code{{display:block;background:none;border:0;padding:0;color:inherit;font-size:13.5px;white-space:pre;font-family:var(--mono)}}
 .chapter pre[data-lang]::before{{content:attr(data-lang);position:absolute;top:12px;left:16px;font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--code-label)}}
 .chapter pre::-webkit-scrollbar{{height:10px;width:10px}}
 .chapter pre::-webkit-scrollbar-thumb{{background:var(--code-control-border);border-radius:6px}}
-.copy-btn{{position:absolute;top:9px;right:10px;background:var(--code-control-bg);color:var(--code-control-fg);border:1px solid var(--code-control-border);border-radius:8px;padding:4px 10px;font-family:var(--sans);font-size:11.5px;cursor:pointer;opacity:0;transition:opacity .15s,background .15s}}
+.copy-btn{{position:absolute;top:9px;right:10px;background:var(--code-control-bg);color:var(--code-control-fg);border:1px solid var(--code-control-border);border-radius:var(--r-xs);padding:4px 10px;font-family:var(--sans);font-size:11.5px;cursor:pointer;opacity:0;transition:opacity .15s,background .15s}}
 .chapter pre:hover .copy-btn,.copy-btn:focus{{opacity:1}}
 .copy-btn:hover{{background:var(--code-control-hover)}}
 
-.chapter table{{width:100%;border-collapse:collapse;margin:1.25em 0;font-size:13.8px;background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}}
+.chapter table{{width:100%;border-collapse:collapse;margin:1.25em 0;font-size:13.8px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden}}
 .chapter th{{background:var(--bg-soft);text-align:left;font-weight:650;color:var(--text)}}
 .chapter th,.chapter td{{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:top}}
 .chapter tr:last-child td{{border-bottom:0}}
 
-.next-link{{display:inline-block;margin-top:14px !important;padding:10px 16px;background:var(--accent-soft);border-radius:11px;color:var(--accent-strong)}}
+.next-link{{display:inline-block;margin-top:14px !important;padding:10px 16px;background:var(--accent-soft);border-radius:var(--r-md);color:var(--accent-strong)}}
 .next-link a{{border-bottom:0}}
 
 .page-foot{{max-width:840px;margin-top:64px;padding-top:22px;border-top:1px solid var(--border);color:var(--faint);font-size:12.5px;line-height:1.8}}
@@ -492,7 +537,7 @@ blockquote p{{margin:.3em 0}}
 .to-top{{position:fixed;right:26px;bottom:26px;width:44px;height:44px;border-radius:50%;border:1px solid var(--border-strong);background:var(--surface);color:var(--text);font-size:18px;cursor:pointer;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:50}}
 .to-top.show{{opacity:1;pointer-events:auto}}
 .to-top:hover{{transform:translateY(-2px)}}
-.menu-toggle{{display:none;position:fixed;top:14px;left:14px;width:42px;height:42px;border-radius:12px;border:1px solid var(--border-strong);background:var(--surface);font-size:18px;cursor:pointer;box-shadow:var(--shadow);z-index:70}}
+.menu-toggle{{display:none;position:fixed;top:14px;left:14px;width:42px;height:42px;border-radius:var(--r-md);border:1px solid var(--border-strong);background:var(--surface);font-size:18px;cursor:pointer;box-shadow:var(--shadow);z-index:70}}
 
 @media (max-width:1000px){{
   .content{{margin-left:0;padding:0 22px 80px}}
@@ -560,8 +605,8 @@ blockquote p{{margin:.3em 0}}
     <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">Apache-2.0</a> 授权。仅供个人学习，非生产用途。
   </div>
   <div class="callout">
-    <strong>阅读提示：</strong>左侧目录支持关键字过滤，并可随滚动高亮当前小节；代码块悬停右上角可一键复制；
-    右下角按钮随时返回顶部；打印时自动隐藏导航。
+    <strong>阅读提示：</strong>左侧可切换风格（Anthropic / OpenAI / Google / Microsoft / Apple / GitHub / Stripe / Vercel），
+    目录支持关键字过滤并随滚动高亮；代码块悬停右上角可一键复制；右下角按钮返回顶部；打印时自动隐藏导航。
   </div>
 </section>
 
@@ -594,7 +639,7 @@ blockquote p{{margin:.3em 0}}
   }}
   var savedTheme = null;
   try {{ savedTheme = localStorage.getItem('kthw-theme'); }} catch (e) {{}}
-  applyTheme(savedTheme || 'claude');
+  applyTheme(savedTheme || 'anthropic');
   if (themeSel) {{
     themeSel.addEventListener('change', function () {{
       applyTheme(themeSel.value);

@@ -32,16 +32,19 @@
 
 | id | 风格 |
 | --- | --- |
-| `claude` | 暖陶土（默认，Claude 文档风） |
-| `paper` | 宣纸水墨（朱砂红 + 宋体标题） |
-| `github` | 简洁白（GitHub Docs 风，浅色代码块） |
-| `nord` | 冷蓝（Nord 配色，无衬线标题） |
-| `solarized` | 米黄（Solarized Light，浅色代码块） |
-| `gruvbox-dark` | 暗色（Gruvbox Dark） |
+| `anthropic` | Anthropic · Claude（默认，暖陶土 + 衬线标题） |
+| `openai` | OpenAI · ChatGPT（白底 + 绿 `#10A37F`，深色代码块） |
+| `google` | Google · Material（蓝 `#1A73E8`，8px 圆角） |
+| `microsoft` | Microsoft · Fluent（蓝 `#0078D4`，Segoe UI，小圆角） |
+| `apple` | Apple · HIG（`#0071E3`，大圆角，系统字体） |
+| `github` | GitHub（蓝 `#0969DA`，浅色代码块，6px 圆角） |
+| `stripe` | Stripe（靛蓝 `#635BFF`，深藏青代码块） |
+| `vercel` | Vercel（黑白、暗色、直角） |
 
-主题在脚本的 `THEMES` 中以「CSS 变量覆盖」定义；`claude` 的完整取值写在模板 `:root` 里，
-其余主题只覆盖差异项。切换状态记在 `localStorage` 的 `kthw-theme` 键，也支持用
-`?theme=<id>` 指定（如 `...zh.html?theme=nord`）。
+主题在脚本的 `THEMES` 中以「CSS 变量覆盖」定义；`anthropic` 的完整取值写在模板 `:root` 里，
+其余主题只覆盖差异项（配色、字体、圆角、代码块）。切换状态记在 `localStorage` 的
+`kthw-theme` 键，也支持用 `?theme=<id>` 指定（如 `...zh.html?theme=openai`）。
+中文仍统一使用内嵌的 KingHwaOldSong-GB。
 
 ### 用法
 
