@@ -41,6 +41,12 @@
 
 状态图例：☐ 未开始 / ◐ 进行中 / ☑ 已翻译 / ✔ 已实测校对
 
+## 单文件版（自动生成）
+
+[docs/zh/kubernetes-the-hard-way-zh.html](kubernetes-the-hard-way-zh.html) 由
+[tools/build_single_file.py](../../tools/build_single_file.py) 生成：把 00–13 章与
+术语表合成一个自包含 HTML（内嵌字体，可离线阅读）。译文更新后请重新生成。
+
 ## 翻译步骤
 
 1. 复制 `_template.md` 为目标章节文件（如 `01-prerequisites.md`）。

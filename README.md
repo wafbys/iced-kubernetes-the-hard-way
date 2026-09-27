@@ -33,6 +33,7 @@
 13. [清理](docs/zh/13-cleanup.md)
 
 > 翻译进度见 [docs/zh/README.md](docs/zh/README.md)；英文原文见 [docs/](docs/)。
+> 离线单文件版（全部章节合并且内嵌字体）：[docs/zh/kubernetes-the-hard-way-zh.html](docs/zh/kubernetes-the-hard-way-zh.html)。
 
 ## 环境准备（Windows 宿主机）
 
@@ -53,6 +54,7 @@
 | `notes/` | 个人练习笔记（含踩坑、补充、验证记录） |
 | `reference/` | 术语表等参考资料 |
 | `scripts/` | 宿主机辅助脚本（如 VMware/VBS 切换），见 [scripts/README.md](scripts/README.md) |
+| `tools/` | 构建脚本（合成单文件 HTML），见 [tools/README.md](tools/README.md) |
 | `configs/` `units/` | 上游配置与 systemd unit 文件（Apache-2.0） |
 
 翻译工作流见 [docs/zh/README.md](docs/zh/README.md)。

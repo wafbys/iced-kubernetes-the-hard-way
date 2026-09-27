@@ -37,6 +37,7 @@ iced-kubernetes-the-hard-way
   - 新增 notes/：个人练习笔记。
   - 新增 reference/：术语表等参考资料。
   - 新增 scripts/：Windows 宿主机 VMware/VBS 切换脚本及说明（非上游内容）。
+  - 新增 tools/：构建脚本，把 docs/zh 与术语表合成自包含单文件 HTML（非上游内容）。
   - 重写 README.md 以说明本项目定位、目录结构与本地环境准备入口。
   - 其他文件（docs/ 英文原文、configs/、units/、ca.conf、downloads-*.txt 等）
     保持与上游一致。
