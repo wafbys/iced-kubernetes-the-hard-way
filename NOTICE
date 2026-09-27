@@ -33,10 +33,12 @@ iced-kubernetes-the-hard-way
 
 相对上游基线（52eb26d），本仓库的改动包括：
 
-  - 新增 docs/zh/：上游章节的中文翻译。
+  - 新增 docs/zh/：上游章节的中文翻译，以及本地补充的环境准备文档 00-debian-install.md。
   - 新增 notes/：个人练习笔记。
   - 新增 reference/：术语表等参考资料。
-  - 重写 README.md 以说明本项目定位。
-  - 其他文件（docs/ 原文、configs/、units/ 等）保持与上游一致。
+  - 新增 scripts/：Windows 宿主机 VMware/VBS 切换脚本及说明（非上游内容）。
+  - 重写 README.md 以说明本项目定位、目录结构与本地环境准备入口。
+  - 其他文件（docs/ 英文原文、configs/、units/、ca.conf、downloads-*.txt 等）
+    保持与上游一致。
 
 同步上游：`git fetch upstream` 后对比 `upstream/master` 的改动即可。

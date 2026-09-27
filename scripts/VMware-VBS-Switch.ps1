@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     为练习 Kubernetes The Hard Way (KTHW) 一键切换 VMware 嵌套虚拟化环境。
 
@@ -6,14 +6,15 @@
     KTHW (https://github.com/kelseyhightower/kubernetes-the-hard-way) 需要 4 台
     Debian 12 虚机(1 jumpbox + 1 server + 2 workers)连在同一网络。在 Windows + VMware
     Workstation/Player 上跑这些虚机时，宿主机若开着 VBS/内存完整性/Hyper-V，
-    VMware 无法独占硬件虚拟化，性能会显著下降，且无法给虚机开启嵌套虚拟化。
+    VMware 无法独占硬件虚拟化(VT-x/AMD-V)，虚机性能会显著下降。
+    注意：KTHW 本身不需要嵌套虚拟化（guest 里只跑 etcd/kube-apiserver/containerd
+    等进程）；只有你要在 Debian guest 里再运行虚机/模拟器时才需要。
 
     本脚本在两种状态间切换（切换后需重启生效）：
 
       vmware  : 关闭 VBS(Device Guard) / 内存完整性(HVCI) / Hyper-V / 虚拟化平台，
-                并 bcdedit hypervisorlaunchtype=off。之后 VMware 可启用“虚拟化 Intel VT-x/
-                AMD-V”以便在 guest 里跑 KTHW 的 control plane（单一 node 上跑 etcd/kube-apiserver 等）。
-      restore : 恢复 Windows 默认安全配置（重新打开 VBS/HVCI/虚拟化平台）。
+                并 bcdedit hypervisorlaunchtype=off，让 VMware 独占硬件虚拟化、恢复性能。
+      restore : 按 vmware 模式记录的原始功能状态，恢复 VBS/HVCI/虚拟化平台/Hyper-V。
 
 .PARAMETER Mode
     vmware | restore | status ；不带参数进入交互菜单。
@@ -46,6 +47,11 @@ if (-not $isAdmin) {
 
 $ErrorActionPreference = 'Stop'
 
+# ---------- 状态记录（vmware 模式保存原始状态，restore 据此恢复） ----------
+$FeatureNames = @('Microsoft-Hyper-V-All', 'VirtualMachinePlatform', 'HypervisorPlatform')
+$StateDir     = Join-Path $env:ProgramData 'VMware-VBS-Switch'
+$StateFile    = Join-Path $StateDir 'features.json'
+
 # ---------- 辅助函数 ----------
 function Write-Head($text) {
     Write-Host ""
@@ -65,6 +71,15 @@ function Set-BcdHypervisor {
     param([string]$Value)   # off | auto
     & bcdedit /set "{current}" hypervisorlaunchtype $Value | Out-Null
     Write-Host "  [bcd]  hypervisorlaunchtype = $Value" -ForegroundColor Green
+}
+
+function Get-FeatureState {
+    param([string]$Name)
+    try {
+        (Get-WindowsOptionalFeature -Online -FeatureName $Name -ErrorAction Stop).State.ToString()
+    } catch {
+        'Unknown'
+    }
 }
 
 function Set-OptionalFeature {
@@ -104,23 +119,44 @@ function Switch-ToVMware {
     Set-RegValue 'HKLM:\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity' 'Enabled' 0
     Set-RegValue 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa' 'LsaCfgFlags' 0
 
-    Set-OptionalFeature 'Microsoft-Hyper-V-All'  'Disable'
-    Set-OptionalFeature 'VirtualMachinePlatform' 'Disable'
-    Set-OptionalFeature 'HypervisorPlatform'     'Disable'
+    $prevFeatures = [ordered]@{}
+    foreach ($f in $FeatureNames) { $prevFeatures[$f] = Get-FeatureState $f }
+    $prevRpsf = (Get-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\DeviceGuard' `
+        -Name 'RequirePlatformSecurityFeatures' -ErrorAction SilentlyContinue).RequirePlatformSecurityFeatures
+    $state = [ordered]@{
+        recordedAt = (Get-Date).ToString('s')
+        features   = $prevFeatures
+        requirePlatformSecurityFeatures = $prevRpsf
+    }
+    New-Item -ItemType Directory -Path $StateDir -Force | Out-Null
+    $state | ConvertTo-Json -Depth 3 | Set-Content -Path $StateFile -Encoding UTF8
+    Write-Host "  [state] 已记录原始状态 -> $StateFile" -ForegroundColor Green
+
+    foreach ($f in $FeatureNames) { Set-OptionalFeature $f 'Disable' }
 
     Set-BcdHypervisor 'off'
 
     Write-Host ""
     Write-Host "  VMware 模式配置完成。" -ForegroundColor Yellow
-    Write-Host "  重启后：打开 VMware 虚机设置 -> 处理器 -> 勾选“虚拟化 Intel VT-x/EPT 或 AMD-V/RVI”，" -ForegroundColor DarkGray
-    Write-Host "  即可给 KTHW 的 Debian 虚机启用嵌套虚拟化。" -ForegroundColor DarkGray
+    Write-Host "  重启后 VMware 即可独占硬件虚拟化、恢复性能。" -ForegroundColor DarkGray
+    Write-Host "  （KTHW 不需要嵌套虚拟化；如需在 guest 内再开虚机，可勾选处理器中的“虚拟化 Intel VT-x/EPT 或 AMD-V/RVI”。）" -ForegroundColor DarkGray
 }
 
 function Switch-ToRestore {
     Write-Head "恢复 Windows 安全模式（重新开启 VBS / 内存完整性 / Hyper-V）"
 
+    $recorded = $null
+    if (Test-Path $StateFile) {
+        try { $recorded = Get-Content $StateFile -Raw | ConvertFrom-Json } catch { $recorded = $null }
+    }
+
+    $rpsf = 1
+    if ($null -ne $recorded.requirePlatformSecurityFeatures) {
+        $rpsf = [int]$recorded.requirePlatformSecurityFeatures
+    }
+
     Set-RegValue 'HKLM:\SYSTEM\CurrentControlSet\Control\DeviceGuard' 'EnableVirtualizationBasedSecurity' 1
-    Set-RegValue 'HKLM:\SYSTEM\CurrentControlSet\Control\DeviceGuard' 'RequirePlatformSecurityFeatures' 1
+    Set-RegValue 'HKLM:\SYSTEM\CurrentControlSet\Control\DeviceGuard' 'RequirePlatformSecurityFeatures' $rpsf
     Set-RegValue 'HKLM:\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity' 'Enabled' 1
 
     try {
@@ -128,8 +164,24 @@ function Switch-ToRestore {
         Write-Host "  [reg]  Lsa\LsaCfgFlags 已删除（恢复系统默认）" -ForegroundColor Green
     } catch {}
 
-    Set-OptionalFeature 'VirtualMachinePlatform' 'Enable'
-    Set-OptionalFeature 'HypervisorPlatform'     'Enable'
+    $prevFeatures = @{}
+    if ($recorded.features) {
+        foreach ($prop in $recorded.features.PSObject.Properties) { $prevFeatures[$prop.Name] = [string]$prop.Value }
+    }
+    if ($prevFeatures.Count -gt 0) {
+        foreach ($f in $FeatureNames) {
+            $was = $prevFeatures[$f]
+            if ($was -eq 'Enabled') {
+                Set-OptionalFeature $f 'Enable'
+            } else {
+                Write-Host "  [dism] $f 原状态为 $(if ($was) { $was } else { '无记录' })，不启用" -ForegroundColor DarkGray
+            }
+        }
+    } else {
+        Write-Host "  [state] 未找到切换前记录（$StateFile），按默认恢复虚拟化平台" -ForegroundColor DarkYellow
+        Set-OptionalFeature 'VirtualMachinePlatform' 'Enable'
+        Set-OptionalFeature 'HypervisorPlatform'     'Enable'
+    }
 
     Set-BcdHypervisor 'auto'
 

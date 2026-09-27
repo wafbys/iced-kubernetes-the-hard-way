@@ -22,7 +22,7 @@
 | container runtime | 容器运行时 | |
 | containerd | containerd | 不译 |
 | CNI / container network interface | 容器网络接口 | |
-| pod CIDR / pod network | Pod 网段 / Pod 网络 | |
+| pod CIDR / pod network | Pod 网段 / Pod 网络（正文也常保留 “Pod CIDR”） | 按语境选用 |
 | service CIDR | Service 网段 | |
 | systemd unit | systemd 单元 | |
 | routing table | 路由表 | |

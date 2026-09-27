@@ -13,7 +13,7 @@
 
 调度到某个节点的 Pod 会从该节点的 Pod CIDR 范围获得一个 IP 地址。此时，由于缺少网络[路由](https://cloud.google.com/compute/docs/vpc/routes)，Pod 无法与运行在其他节点上的 Pod 通信。
 
-在本实验中，你将作为每个工作节点创建一条路由，把该节点的 Pod CIDR 范围映射到该节点的内部 IP 地址。
+在本实验中，你将为每个工作节点创建一条路由，把该节点的 Pod CIDR 范围映射到该节点的内部 IP 地址。
 
 > 实现 Kubernetes 网络模型还有[其他方式](https://kubernetes.io/docs/concepts/cluster-administration/networking/#how-to-achieve-this)。
 

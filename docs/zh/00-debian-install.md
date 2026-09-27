@@ -14,7 +14,7 @@
 ## 0. 宿主机准备（Windows + VMware）
 
 1. 确认 CPU 虚拟化已在 BIOS/UEFI 打开（Intel VT-x / AMD-V）。
-2. **先运行仓库里的切换脚本**，否则 VMware 会被 Hyper-V 抢占、性能差且无法嵌套虚拟化：
+2. **先运行仓库里的切换脚本**，否则 Hyper-V/VBS 开启时 VMware 会走兼容模式、虚机性能明显下降：
    ```powershell
    pwsh -NoProfile -ExecutionPolicy Bypass -File .\scripts\VMware-VBS-Switch.ps1 vmware
    ```
@@ -41,7 +41,8 @@
 4. 内存/CPU 按上表填。
 5. 网络：**NAT**（4 台都在同一 NAT 网段即可互通；也可用“自定义”指定 `VMnet8`）。
 6. 完成后进入 `Edit virtual machine settings` → **Processors** → 勾选
-   **“Virtualize Intel VT-x/EPT or AMD-V/RVI”**（嵌套虚拟化，KTHW 控制平面需要）。
+   **“Virtualize Intel VT-x/EPT or AMD-V/RVI”**（可选：仅当你要在 Debian 客户机里
+   再运行虚机/模拟器时才需要；KTHW 本身不需要嵌套虚拟化）。
 7. `CD/DVD` → 挂载下载好的 Debian ISO。
 
 ## 2. 安装 Debian 12
@@ -148,6 +149,7 @@ for h in 192.168.152.10 192.168.152.11 192.168.152.12 192.168.152.13; do
   ssh -o StrictHostKeyChecking=no debian@$h 'hostname; head -1 /etc/os-release'
 done
 ```
-四台都返回正确主机名与 `Debian GNU/Linux 12 (bookworm)` 即准备完成，可进入第 02 章。
+四台都返回正确主机名与 `Debian GNU/Linux 12 (bookworm)` 即准备完成，可进入第 02 章
+（第 01 章的机器要求与系统校验已由本章第 0、3 节覆盖）。
 
 下一节：[设置跳板机](02-jumpbox.md)
