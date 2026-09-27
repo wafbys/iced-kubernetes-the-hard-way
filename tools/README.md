@@ -42,9 +42,9 @@
 | `vercel` | Vercel（黑白、暗色、直角） |
 
 主题在脚本的 `THEMES` 中以「CSS 变量覆盖」定义；`anthropic` 的完整取值写在模板 `:root` 里，
-其余主题只覆盖差异项（配色、字体、圆角、代码块）。切换状态记在 `localStorage` 的
-`kthw-theme` 键，也支持用 `?theme=<id>` 指定（如 `...zh.html?theme=openai`）。
-中文仍统一使用内嵌的 KingHwaOldSong-GB。
+其余主题只覆盖差异项。所有主题**共用同一组字体**（Inter / Source Serif 4 / New Computer Modern Mono，
+中文统一 KingHwaOldSong-GB），差异体现在**字号、行高、内容宽度/侧栏宽度、圆角、间距与配色**上。
+切换状态记在 `localStorage` 的 `kthw-theme` 键，也支持用 `?theme=<id>` 指定（如 `...zh.html?theme=openai`）。
 
 ### 用法
 
