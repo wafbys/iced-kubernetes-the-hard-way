@@ -28,16 +28,16 @@
 | 01 | docs/01-prerequisites.md | docs/zh/01-prerequisites.md | ☑ 已翻译 |
 | 02 | docs/02-jumpbox.md | docs/zh/02-jumpbox.md | ☑ 已翻译 |
 | 03 | docs/03-compute-resources.md | docs/zh/03-compute-resources.md | ☑ 已翻译 |
-| 04 | docs/04-certificate-authority.md | docs/zh/04-certificate-authority.md | ☐ 未开始 |
-| 05 | docs/05-kubernetes-configuration-files.md | docs/zh/05-kubernetes-configuration-files.md | ☐ 未开始 |
-| 06 | docs/06-data-encryption-keys.md | docs/zh/06-data-encryption-keys.md | ☐ 未开始 |
-| 07 | docs/07-bootstrapping-etcd.md | docs/zh/07-bootstrapping-etcd.md | ☐ 未开始 |
-| 08 | docs/08-bootstrapping-kubernetes-controllers.md | docs/zh/08-bootstrapping-kubernetes-controllers.md | ☐ 未开始 |
-| 09 | docs/09-bootstrapping-kubernetes-workers.md | docs/zh/09-bootstrapping-kubernetes-workers.md | ☐ 未开始 |
-| 10 | docs/10-configuring-kubectl.md | docs/zh/10-configuring-kubectl.md | ☐ 未开始 |
-| 11 | docs/11-pod-network-routes.md | docs/zh/11-pod-network-routes.md | ☐ 未开始 |
-| 12 | docs/12-smoke-test.md | docs/zh/12-smoke-test.md | ☐ 未开始 |
-| 13 | docs/13-cleanup.md | docs/zh/13-cleanup.md | ☐ 未开始 |
+| 04 | docs/04-certificate-authority.md | docs/zh/04-certificate-authority.md | ☑ 已翻译 |
+| 05 | docs/05-kubernetes-configuration-files.md | docs/zh/05-kubernetes-configuration-files.md | ☑ 已翻译 |
+| 06 | docs/06-data-encryption-keys.md | docs/zh/06-data-encryption-keys.md | ☑ 已翻译 |
+| 07 | docs/07-bootstrapping-etcd.md | docs/zh/07-bootstrapping-etcd.md | ☑ 已翻译 |
+| 08 | docs/08-bootstrapping-kubernetes-controllers.md | docs/zh/08-bootstrapping-kubernetes-controllers.md | ☑ 已翻译 |
+| 09 | docs/09-bootstrapping-kubernetes-workers.md | docs/zh/09-bootstrapping-kubernetes-workers.md | ☑ 已翻译 |
+| 10 | docs/10-configuring-kubectl.md | docs/zh/10-configuring-kubectl.md | ☑ 已翻译 |
+| 11 | docs/11-pod-network-routes.md | docs/zh/11-pod-network-routes.md | ☑ 已翻译 |
+| 12 | docs/12-smoke-test.md | docs/zh/12-smoke-test.md | ☑ 已翻译 |
+| 13 | docs/13-cleanup.md | docs/zh/13-cleanup.md | ☑ 已翻译 |
 
 状态图例：☐ 未开始 / ◐ 进行中 / ☑ 已翻译 / ✔ 已实测校对
 
