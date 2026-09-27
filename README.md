@@ -17,6 +17,7 @@
 
 ## 文档目录（中文）
 
+0. [环境准备：安装 Debian](docs/zh/00-debian-install.md)（本仓库补充）
 1. [前提条件](docs/zh/01-prerequisites.md)
 2. [设置跳板机](docs/zh/02-jumpbox.md)
 3. [准备计算资源](docs/zh/03-compute-resources.md)
@@ -39,6 +40,9 @@
 嵌套虚拟化。使用 [scripts/VMware-VBS-Switch.ps1](scripts/VMware-VBS-Switch.ps1) 在
 “VMware 模式”与“系统安全模式”之间切换（需重启），详见
 [scripts/README.md](scripts/README.md)。
+
+4 台 Debian 12 虚机的安装与配置步骤见
+[docs/zh/00-debian-install.md](docs/zh/00-debian-install.md)。
 
 ## 仓库结构
 
