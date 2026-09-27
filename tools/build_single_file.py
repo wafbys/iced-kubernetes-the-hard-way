@@ -41,6 +41,77 @@ FONT_FILES = [
     ("NewComputerModern Mono 10", "NewCM Mono Bold", ["NewCMMono10-Bold.otf"], "700", False),
     ("KingHwaOldSong-GB", "京華老宋体-GB", ["京華老宋体-GB.ttf", "KingHwaOldSong-GB.ttf"], "400", False),
 ]
+
+# 主题：(id, 下拉显示名, CSS 变量覆盖)。claude 为默认（写在 :root 中），覆盖项留空。
+THEMES = [
+    ("claude", "Claude · 暖陶土", {}),
+    ("paper", "宣纸 · 水墨", {
+        "sidebar-bg": "linear-gradient(180deg,#EFE7D6,#E8E0CC)",
+        "bg": "#F4EFE3", "bg-soft": "#EAE2D0", "surface": "#FBF8F0",
+        "text": "#201D18", "muted": "#6C6453", "faint": "#948A74",
+        "accent": "#A8341F", "accent-strong": "#8A2A18", "accent-soft": "#EEDFD2", "on-accent": "#FBF8F0",
+        "border": "#DED4BE", "border-strong": "#CCC0A5",
+        "code-bg": "#2A2521", "code-text": "#EDE5D6", "code-inline-fg": "#5A4A38", "code-border": "transparent",
+        "code-control-bg": "rgba(255,255,255,.08)", "code-control-fg": "#EDE5D6",
+        "code-control-border": "rgba(255,255,255,.15)", "code-control-hover": "rgba(255,255,255,.2)",
+        "code-label": "rgba(237,229,214,.42)",
+        "shadow": "0 1px 2px rgba(32,29,24,.05),0 10px 30px rgba(32,29,24,.07)",
+        "quote-text": "#57503F", "heading": "var(--serif)",
+    }),
+    ("github", "GitHub · 简洁白", {
+        "sidebar-bg": "#F6F8FA",
+        "bg": "#FFFFFF", "bg-soft": "#F6F8FA", "surface": "#FFFFFF",
+        "text": "#1F2328", "muted": "#59636E", "faint": "#818B98",
+        "accent": "#0969DA", "accent-strong": "#0757B8", "accent-soft": "#DDF4FF", "on-accent": "#FFFFFF",
+        "border": "#D0D7DE", "border-strong": "#AFB8C1",
+        "code-bg": "#F6F8FA", "code-text": "#1F2328", "code-inline-fg": "#1F2328", "code-border": "#D0D7DE",
+        "code-control-bg": "rgba(31,35,40,.06)", "code-control-fg": "#57606A",
+        "code-control-border": "rgba(31,35,40,.12)", "code-control-hover": "rgba(31,35,40,.12)",
+        "code-label": "rgba(31,35,40,.45)",
+        "shadow": "0 1px 0 rgba(31,35,40,.04),0 3px 6px rgba(140,149,159,.15)",
+        "quote-text": "#59636E", "heading": "var(--sans)",
+    }),
+    ("nord", "Nord · 冷蓝", {
+        "sidebar-bg": "linear-gradient(180deg,#E9EDF4,#E1E7F0)",
+        "bg": "#F2F4F8", "bg-soft": "#E5E9F0", "surface": "#FFFFFF",
+        "text": "#2E3440", "muted": "#4C566A", "faint": "#7C88A0",
+        "accent": "#5E81AC", "accent-strong": "#4A6A91", "accent-soft": "#DCE4F0", "on-accent": "#FFFFFF",
+        "border": "#D8DEE9", "border-strong": "#BFC9D9",
+        "code-bg": "#2E3440", "code-text": "#E5E9F0", "code-inline-fg": "#3B4252", "code-border": "transparent",
+        "code-control-bg": "rgba(255,255,255,.1)", "code-control-fg": "#E5E9F0",
+        "code-control-border": "rgba(255,255,255,.18)", "code-control-hover": "rgba(255,255,255,.22)",
+        "code-label": "rgba(229,233,240,.45)",
+        "shadow": "0 1px 2px rgba(46,52,64,.06),0 10px 30px rgba(46,52,64,.08)",
+        "quote-text": "#3B4252", "heading": "var(--sans)",
+    }),
+    ("solarized", "Solarized · 米黄", {
+        "sidebar-bg": "linear-gradient(180deg,#F4EEDB,#EDE6D0)",
+        "bg": "#FDF6E3", "bg-soft": "#EEE8D5", "surface": "#FEFBF1",
+        "text": "#586E75", "muted": "#657B83", "faint": "#93A1A1",
+        "accent": "#268BD2", "accent-strong": "#1F6FA8", "accent-soft": "#E2EDF1", "on-accent": "#FDF6E3",
+        "border": "#E6DEC6", "border-strong": "#D3C8A8",
+        "code-bg": "#EEE8D5", "code-text": "#586E75", "code-inline-fg": "#586E75", "code-border": "#D9CFB4",
+        "code-control-bg": "rgba(0,43,54,.06)", "code-control-fg": "#657B83",
+        "code-control-border": "rgba(0,43,54,.14)", "code-control-hover": "rgba(0,43,54,.12)",
+        "code-label": "rgba(88,110,117,.5)",
+        "shadow": "0 1px 2px rgba(0,43,54,.05),0 10px 30px rgba(0,43,54,.06)",
+        "quote-text": "#586E75", "heading": "var(--serif)",
+    }),
+    ("gruvbox-dark", "Gruvbox · 暗色", {
+        "color-scheme": "dark",
+        "sidebar-bg": "linear-gradient(180deg,#222222,#1B1B1B)",
+        "bg": "#1D2021", "bg-soft": "#282828", "surface": "#282828",
+        "text": "#EBDBB2", "muted": "#BDAE93", "faint": "#928374",
+        "accent": "#D65D0E", "accent-strong": "#FE8019", "accent-soft": "#3C3836", "on-accent": "#1D2021",
+        "border": "#3C3836", "border-strong": "#504945",
+        "code-bg": "#141414", "code-text": "#EBDBB2", "code-inline-fg": "#FABD2F", "code-border": "#3C3836",
+        "code-control-bg": "rgba(255,255,255,.08)", "code-control-fg": "#EBDBB2",
+        "code-control-border": "rgba(255,255,255,.16)", "code-control-hover": "rgba(255,255,255,.2)",
+        "code-label": "rgba(235,219,178,.42)",
+        "shadow": "0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.4)",
+        "quote-text": "#D5C4A1", "heading": "var(--sans)",
+    }),
+]
 REPO = "https://github.com/wafbys/iced-kubernetes-the-hard-way"
 BLOB = REPO + "/blob/main/"
 
@@ -271,10 +342,20 @@ def main() -> None:
         + '\n    <a class="toc-cover" href="#glossary">附录 · 术语表</a>'
     )
 
+    themes_css = "\n".join(
+        f'html[data-theme="{tid}"]{{' + "".join(f"{k}:{v};" for k, v in ov.items()) + "}"
+        for tid, _label, ov in THEMES if ov
+    )
+    theme_options = "\n    ".join(
+        f'<option value="{tid}">{label}</option>' for tid, label, _ in THEMES
+    )
+
     doc = TEMPLATE.format(
         repo=REPO,
         commit=commit,
         toc=toc,
+        themes=themes_css,
+        theme_options=theme_options,
         content="\n\n".join(chapters_html) + "\n\n" + g_html,
     )
     if not args.no_fonts:
@@ -301,35 +382,47 @@ TEMPLATE = r"""<!DOCTYPE html>
 <meta name="description" content="Kubernetes The Hard Way 中文版 —— 00 至 13 章与术语表的自包含单文件 HTML。">
 <style>
 :root{{
-  --bg:#FAF9F5; --bg-soft:#F0EEE6; --surface:#FFFFFF;
-  --text:#1F1E1D; --muted:#6B6862; --faint:#918B80;
-  --accent:#D97757; --accent-strong:#BC5B39; --accent-soft:#F4E4DC;
-  --border:#E6E1D6; --border-strong:#D9D3C5;
-  --code-bg:#262523; --code-text:#ECE9E2;
+  --sidebar:300px;
   --serif:"Source Serif 4","Source Serif Pro","Source Serif 4 Variable",Georgia,"Times New Roman","KingHwaOldSong-GB","Songti SC","SimSun",serif;
   --sans:"Inter","Inter Variable","Segoe UI",Roboto,"Helvetica Neue",Arial,"KingHwaOldSong-GB","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
   --mono:"NewComputerModern Mono 10","New Computer Modern Mono","NewCM10-Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,"Cascadia Code","KingHwaOldSong-GB","Sarasa Mono SC",monospace;
+  --heading:var(--serif);
+  --sidebar-bg:linear-gradient(180deg,#F6F2E9,#F0ECE1);
+  --bg:#FAF9F5; --bg-soft:#F0EEE6; --surface:#FFFFFF;
+  --text:#1F1E1D; --muted:#6B6862; --faint:#918B80;
+  --accent:#D97757; --accent-strong:#BC5B39; --accent-soft:#F4E4DC; --on-accent:#FFFFFF;
+  --border:#E6E1D6; --border-strong:#D9D3C5;
+  --code-bg:#262523; --code-text:#ECE9E2; --code-inline-fg:#4A3B34; --code-border:transparent;
+  --code-control-bg:rgba(255,255,255,.09); --code-control-fg:#EDEBE4;
+  --code-control-border:rgba(255,255,255,.16); --code-control-hover:rgba(255,255,255,.22);
+  --code-label:rgba(236,233,226,.42);
   --shadow:0 1px 2px rgba(31,30,29,.05),0 10px 30px rgba(31,30,29,.06);
-  --sidebar:300px;
+  --quote-text:#4A4844;
+  color-scheme:light;
 }}
+{themes}
 *{{box-sizing:border-box}}
 html{{scroll-behavior:smooth}}
 body{{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.85;-webkit-font-smoothing:antialiased}}
 a{{color:inherit}}
 code,pre,samp,kbd{{font-family:var(--mono)}}
-:not(pre)>code{{background:var(--bg-soft);border:1px solid var(--border);border-radius:6px;padding:.1em .42em;color:#4A3B34}}
+:not(pre)>code{{background:var(--bg-soft);border:1px solid var(--border);border-radius:6px;padding:.1em .42em;color:var(--code-inline-fg)}}
 
 /* ---------- 侧栏 ---------- */
-.sidebar{{position:fixed;top:0;bottom:0;left:0;width:var(--sidebar);display:flex;flex-direction:column;background:linear-gradient(180deg,#F6F2E9,#F0ECE1);border-right:1px solid var(--border);z-index:40}}
+.sidebar{{position:fixed;top:0;bottom:0;left:0;width:var(--sidebar);display:flex;flex-direction:column;background:var(--sidebar-bg);border-right:1px solid var(--border);z-index:40}}
 .brand{{display:flex;gap:12px;align-items:center;padding:22px 20px 14px}}
-.brand-mark{{flex:none;width:40px;height:40px;border-radius:12px;background:var(--accent);color:#fff;font-weight:700;font-size:13px;display:grid;place-items:center;letter-spacing:.5px;box-shadow:var(--shadow)}}
-.brand-title{{font-family:var(--serif);font-size:16px;font-weight:600;line-height:1.25}}
+.brand-mark{{flex:none;width:40px;height:40px;border-radius:12px;background:var(--accent);color:var(--on-accent);font-weight:700;font-size:13px;display:grid;place-items:center;letter-spacing:.5px;box-shadow:var(--shadow)}}
+.brand-title{{font-family:var(--heading);font-size:16px;font-weight:600;line-height:1.25}}
 .brand-sub{{font-size:11.5px;color:var(--muted);margin-top:3px;letter-spacing:.3px}}
+.theme-bar{{margin:0 18px 8px;display:flex;align-items:center;gap:8px}}
+.theme-bar label{{font-size:11px;color:var(--faint);letter-spacing:.6px;flex:none}}
+.theme-bar select{{flex:1;min-width:0;padding:7px 10px;border:1px solid var(--border-strong);border-radius:10px;background:var(--surface);color:var(--text);font-family:inherit;font-size:12.5px}}
+.theme-bar select:focus{{outline:2px solid var(--accent-soft);border-color:var(--accent)}}
 .filter{{margin:0 18px 10px;padding:9px 12px;border:1px solid var(--border-strong);border-radius:10px;background:var(--surface);font-family:inherit;font-size:13px;color:var(--text)}}
 .filter:focus{{outline:2px solid var(--accent-soft);border-color:var(--accent)}}
 .toc{{flex:1;overflow-y:auto;padding:4px 12px 18px}}
 .toc a{{display:block;text-decoration:none;color:var(--muted);font-size:13px;line-height:1.45;padding:5px 10px;border-radius:8px}}
-.toc a:hover{{background:rgba(217,119,87,.09);color:var(--text)}}
+.toc a:hover{{background:color-mix(in srgb,var(--accent) 12%,transparent);color:var(--text)}}
 .toc a.active{{background:var(--accent-soft);color:var(--accent-strong);font-weight:600}}
 .toc .toc-cover{{font-weight:600;color:var(--text);margin:2px 0 6px}}
 .toc .toc-chapter{{margin-top:8px;font-weight:600;color:var(--text);font-size:13.5px}}
@@ -347,43 +440,43 @@ code,pre,samp,kbd{{font-family:var(--mono)}}
 .content{{margin-left:var(--sidebar);padding:0 48px 90px;max-width:1120px}}
 .cover{{max-width:840px;padding:76px 0 42px;border-bottom:1px solid var(--border);scroll-margin-top:20px}}
 .eyebrow{{font-size:12.5px;letter-spacing:2.2px;text-transform:uppercase;color:var(--accent-strong);font-weight:600}}
-.cover h1{{font-family:var(--serif);font-size:clamp(34px,5vw,52px);line-height:1.08;letter-spacing:-.6px;margin:16px 0 12px}}
+.cover h1{{font-family:var(--heading);font-size:clamp(34px,5vw,52px);line-height:1.08;letter-spacing:-.6px;margin:16px 0 12px}}
 .lede{{font-size:17.5px;color:var(--muted);max-width:660px;margin:0}}
 .meta-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin:30px 0 10px}}
 .meta-card{{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:13px 16px;box-shadow:var(--shadow)}}
 .meta-card dt{{font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--faint);margin:0 0 5px}}
 .meta-card dd{{margin:0;font-size:13.5px;line-height:1.6}}
-.callout{{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;color:#4A4844;font-size:14px;line-height:1.75}}
+.callout{{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 18px;margin:16px 0;color:var(--quote-text);font-size:14px;line-height:1.75}}
 .callout a{{color:var(--accent-strong)}}
 kbd{{font-family:var(--mono);font-size:12px;background:var(--bg-soft);border:1px solid var(--border-strong);border-bottom-width:2px;border-radius:6px;padding:1px 6px}}
 
 .chapter{{max-width:840px;padding-top:54px;scroll-margin-top:10px}}
 .chapter-head{{display:flex;align-items:baseline;gap:14px;margin:0 0 4px}}
-.chapter-num{{flex:none;font-family:var(--serif);font-size:14px;font-weight:700;color:#fff;background:var(--accent);border-radius:9px;padding:5px 11px;letter-spacing:1px}}
-.chapter-head h1{{margin:0;font-family:var(--serif);font-size:clamp(28px,3.6vw,36px);line-height:1.2;letter-spacing:-.4px}}
-.chapter h2{{font-family:var(--serif);font-size:24px;line-height:1.3;margin:2.3em 0 .7em;padding-top:1.3em;border-top:1px solid var(--border)}}
-.chapter h3{{font-family:var(--serif);font-size:19.5px;margin:1.9em 0 .5em}}
+.chapter-num{{flex:none;font-family:var(--heading);font-size:14px;font-weight:700;color:var(--on-accent);background:var(--accent);border-radius:9px;padding:5px 11px;letter-spacing:1px}}
+.chapter-head h1{{margin:0;font-family:var(--heading);font-size:clamp(28px,3.6vw,36px);line-height:1.2;letter-spacing:-.4px}}
+.chapter h2{{font-family:var(--heading);font-size:24px;line-height:1.3;margin:2.3em 0 .7em;padding-top:1.3em;border-top:1px solid var(--border)}}
+.chapter h3{{font-family:var(--heading);font-size:19.5px;margin:1.9em 0 .5em}}
 .chapter h4{{font-size:15.5px;margin:1.5em 0 .4em}}
 h1,h2,h3,h4{{scroll-margin-top:22px}}
 .chapter p{{margin:.85em 0}}
-.chapter a{{color:var(--accent-strong);text-decoration:none;border-bottom:1px solid rgba(188,91,57,.28)}}
+.chapter a{{color:var(--accent-strong);text-decoration:none;border-bottom:1px solid color-mix(in srgb,var(--accent-strong) 32%,transparent)}}
 .chapter a:hover{{border-bottom-color:var(--accent-strong)}}
 .chapter strong{{font-weight:650}}
 .chapter ul,.chapter ol{{padding-left:1.45em;margin:.85em 0}}
 .chapter li{{margin:.35em 0}}
 .chapter li::marker{{color:var(--accent)}}
 .chapter hr{{border:0;border-top:1px solid var(--border);margin:2em 0}}
-blockquote{{margin:1.2em 0;padding:.75em 1.15em;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;color:#4A4844}}
+blockquote{{margin:1.2em 0;padding:.75em 1.15em;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;color:var(--quote-text)}}
 blockquote p{{margin:.3em 0}}
-.chapter code{{font-family:var(--mono);font-size:.85em;background:var(--bg-soft);border:1px solid var(--border);border-radius:6px;padding:.12em .4em;color:#4A3B34;white-space:nowrap}}
-.chapter pre{{position:relative;background:var(--code-bg);color:var(--code-text);border-radius:14px;padding:40px 20px 18px;overflow:auto;margin:1.25em 0;box-shadow:var(--shadow);line-height:1.65}}
+.chapter code{{font-family:var(--mono);font-size:.85em;background:var(--bg-soft);border:1px solid var(--border);border-radius:6px;padding:.12em .4em;color:var(--code-inline-fg);white-space:nowrap}}
+.chapter pre{{position:relative;background:var(--code-bg);color:var(--code-text);border:1px solid var(--code-border);border-radius:14px;padding:40px 20px 18px;overflow:auto;margin:1.25em 0;box-shadow:var(--shadow);line-height:1.65}}
 .chapter pre code{{display:block;background:none;border:0;padding:0;color:inherit;font-size:13.5px;white-space:pre;font-family:var(--mono)}}
-.chapter pre[data-lang]::before{{content:attr(data-lang);position:absolute;top:12px;left:16px;font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;color:rgba(236,233,226,.42)}}
+.chapter pre[data-lang]::before{{content:attr(data-lang);position:absolute;top:12px;left:16px;font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--code-label)}}
 .chapter pre::-webkit-scrollbar{{height:10px;width:10px}}
-.chapter pre::-webkit-scrollbar-thumb{{background:rgba(255,255,255,.18);border-radius:6px}}
-.copy-btn{{position:absolute;top:9px;right:10px;background:rgba(255,255,255,.09);color:#EDEBE4;border:1px solid rgba(255,255,255,.16);border-radius:8px;padding:4px 10px;font-family:var(--sans);font-size:11.5px;cursor:pointer;opacity:0;transition:opacity .15s,background .15s}}
+.chapter pre::-webkit-scrollbar-thumb{{background:var(--code-control-border);border-radius:6px}}
+.copy-btn{{position:absolute;top:9px;right:10px;background:var(--code-control-bg);color:var(--code-control-fg);border:1px solid var(--code-control-border);border-radius:8px;padding:4px 10px;font-family:var(--sans);font-size:11.5px;cursor:pointer;opacity:0;transition:opacity .15s,background .15s}}
 .chapter pre:hover .copy-btn,.copy-btn:focus{{opacity:1}}
-.copy-btn:hover{{background:rgba(255,255,255,.2)}}
+.copy-btn:hover{{background:var(--code-control-hover)}}
 
 .chapter table{{width:100%;border-collapse:collapse;margin:1.25em 0;font-size:13.8px;background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden}}
 .chapter th{{background:var(--bg-soft);text-align:left;font-weight:650;color:var(--text)}}
@@ -418,6 +511,7 @@ blockquote p{{margin:.3em 0}}
   pre{{white-space:pre-wrap;word-break:break-word;box-shadow:none}}
 }}
 </style>
+<script>try{{var t=localStorage.getItem('kthw-theme');if(t)document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
 </head>
 <body>
 <div class="progress" id="progress"><span id="progressBar"></span></div>
@@ -430,6 +524,10 @@ blockquote p{{margin:.3em 0}}
       <div class="brand-title">Kubernetes The Hard Way</div>
       <div class="brand-sub">中文版 · 自包含单文件</div>
     </div>
+  </div>
+  <div class="theme-bar">
+    <label for="theme">主题</label>
+    <select id="theme">{theme_options}</select>
   </div>
   <input id="filter" class="filter" type="search" placeholder="过滤目录…" aria-label="过滤目录">
   <nav class="toc" id="toc">
@@ -487,6 +585,22 @@ blockquote p{{margin:.3em 0}}
   sidebar.addEventListener('click', function (e) {{
     if (e.target.closest('a') && window.innerWidth <= 1000) sidebar.classList.remove('open');
   }});
+
+  var themeSel = document.getElementById('theme');
+  function applyTheme(t) {{
+    if (!t) return;
+    document.documentElement.setAttribute('data-theme', t);
+    if (themeSel) themeSel.value = t;
+  }}
+  var savedTheme = null;
+  try {{ savedTheme = localStorage.getItem('kthw-theme'); }} catch (e) {{}}
+  applyTheme(savedTheme || 'claude');
+  if (themeSel) {{
+    themeSel.addEventListener('change', function () {{
+      applyTheme(themeSel.value);
+      try {{ localStorage.setItem('kthw-theme', themeSel.value); }} catch (e) {{}}
+    }});
+  }}
 
   var bar = document.getElementById('progressBar');
   var toTop = document.getElementById('toTop');

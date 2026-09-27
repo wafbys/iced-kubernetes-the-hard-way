@@ -26,6 +26,23 @@
 字体在 `FONT_DIRS`（默认 `C:\Windows\Fonts` 及用户字体目录）中按候选名查找；
 找不到就跳过该字体、退回浏览器本机字体。用 `--no-fonts` 可完全关闭内嵌。
 
+### 内置主题
+
+生成的 HTML 在侧栏提供主题切换（用 `localStorage` 记忆选择）：
+
+| id | 风格 |
+| --- | --- |
+| `claude` | 暖陶土（默认，Claude 文档风） |
+| `paper` | 宣纸水墨（朱砂红 + 宋体标题） |
+| `github` | 简洁白（GitHub Docs 风，浅色代码块） |
+| `nord` | 冷蓝（Nord 配色，无衬线标题） |
+| `solarized` | 米黄（Solarized Light，浅色代码块） |
+| `gruvbox-dark` | 暗色（Gruvbox Dark） |
+
+主题在脚本的 `THEMES` 中以「CSS 变量覆盖」定义；`claude` 的完整取值写在模板 `:root` 里，
+其余主题只覆盖差异项。切换状态记在 `localStorage` 的 `kthw-theme` 键，也支持用
+`?theme=<id>` 指定（如 `...zh.html?theme=nord`）。
+
 ### 用法
 
 ```bash
