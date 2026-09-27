@@ -385,8 +385,15 @@ def main() -> None:
         + '\n    <a class="toc-cover" href="#glossary">附录 · 术语表</a>'
     )
 
+    def decls(ov):
+        # 变量名统一补 "--"（color-scheme 是原生属性，保持不变）
+        return "".join(
+            f"{k}:{v};" if k == "color-scheme" else f"--{k}:{v};"
+            for k, v in ov.items()
+        )
+
     themes_css = "\n".join(
-        f'html[data-theme="{tid}"]{{' + "".join(f"{k}:{v};" for k, v in ov.items()) + "}"
+        f'html[data-theme="{tid}"]{{{decls(ov)}}}'
         for tid, _label, ov in THEMES if ov
     )
     theme_options = "\n    ".join(
