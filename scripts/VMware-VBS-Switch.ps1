@@ -75,8 +75,17 @@ function Set-BcdHypervisor {
 
 function Get-FeatureState {
     param([string]$Name)
+    # 用 Win32_OptionalFeature(WMI) 读状态，约 0.1~1 秒。
+    # 不要用 Get-WindowsOptionalFeature -Online：它会为每个功能启动一次 DISM 联机会话，
+    # 动辄数分钟且期间无任何输出，看起来就像卡死。
     try {
-        (Get-WindowsOptionalFeature -Online -FeatureName $Name -ErrorAction Stop).State.ToString()
+        $f = Get-CimInstance Win32_OptionalFeature -Filter "Name='$Name'" -ErrorAction Stop
+        switch ([int]$f.InstallState) {
+            1 { 'Enabled' }
+            2 { 'Disabled' }
+            3 { 'Absent' }
+            default { 'Unknown' }
+        }
     } catch {
         'Unknown'
     }
@@ -84,11 +93,25 @@ function Get-FeatureState {
 
 function Set-OptionalFeature {
     param([string]$Name, [string]$State)   # Enable | Disable
-    & dism.exe /Online /$State-Feature /FeatureName:$Name /NoRestart /Quiet 2>&1 | Out-Null
-    if ($LASTEXITCODE -eq 0) {
-        Write-Host "  [dism] $Name -> $State" -ForegroundColor Green
+    $target = if ($State -eq 'Enable') { 'Enabled' } else { 'Disabled' }
+
+    if ((Get-FeatureState $Name) -eq $target) {
+        Write-Host "  [dism] $Name 已是 $target，跳过" -ForegroundColor DarkGray
+        return
+    }
+
+    Write-Host "  [dism] $Name -> $State ...（DISM 可能要几分钟，请勿关闭窗口）" -ForegroundColor DarkYellow
+    $sw = [System.Diagnostics.Stopwatch]::StartNew()
+    # 2>&1 把原生命令的 stderr 并进输出流：否则在 $ErrorActionPreference='Stop' 下
+    # DISM 往 stderr 写一行就会被当成 NativeCommandError 直接终止脚本。
+    & dism.exe /Online /$State-Feature /FeatureName:$Name /NoRestart 2>&1 |
+        ForEach-Object { Write-Host "    $_" -ForegroundColor DarkGray }
+    $code = $LASTEXITCODE
+    $sw.Stop()
+    if ($code -eq 0) {
+        Write-Host ("  [dism] $Name -> $State 完成（{0:N0}s）" -f $sw.Elapsed.TotalSeconds) -ForegroundColor Green
     } else {
-        Write-Host "  [dism] $Name -> $State (不可用/已跳过)" -ForegroundColor DarkYellow
+        Write-Host ("  [dism] $Name -> $State 失败/不可用（exit=$code, {0:N0}s）" -f $sw.Elapsed.TotalSeconds) -ForegroundColor DarkYellow
     }
 }
 
@@ -114,11 +137,9 @@ function Show-Status {
 function Switch-ToVMware {
     Write-Head "切换到 VMware 模式（关闭 VBS / 内存完整性 / Hyper-V）"
 
-    Set-RegValue 'HKLM:\SYSTEM\CurrentControlSet\Control\DeviceGuard' 'EnableVirtualizationBasedSecurity' 0
-    Set-RegValue 'HKLM:\SYSTEM\CurrentControlSet\Control\DeviceGuard' 'RequirePlatformSecurityFeatures' 0
-    Set-RegValue 'HKLM:\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity' 'Enabled' 0
-    Set-RegValue 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa' 'LsaCfgFlags' 0
-
+    # 先读取并记录原始状态，再改注册表。
+    # （顺序不能反：RequirePlatformSecurityFeatures 被写成 0 之后就再也读不到原值了。）
+    Write-Host "  正在读取当前 Windows 功能状态..." -ForegroundColor DarkGray
     $prevFeatures = [ordered]@{}
     foreach ($f in $FeatureNames) { $prevFeatures[$f] = Get-FeatureState $f }
     $prevRpsf = (Get-ItemProperty 'HKLM:\SYSTEM\CurrentControlSet\Control\DeviceGuard' `
@@ -131,6 +152,11 @@ function Switch-ToVMware {
     New-Item -ItemType Directory -Path $StateDir -Force | Out-Null
     $state | ConvertTo-Json -Depth 3 | Set-Content -Path $StateFile -Encoding UTF8
     Write-Host "  [state] 已记录原始状态 -> $StateFile" -ForegroundColor Green
+
+    Set-RegValue 'HKLM:\SYSTEM\CurrentControlSet\Control\DeviceGuard' 'EnableVirtualizationBasedSecurity' 0
+    Set-RegValue 'HKLM:\SYSTEM\CurrentControlSet\Control\DeviceGuard' 'RequirePlatformSecurityFeatures' 0
+    Set-RegValue 'HKLM:\SYSTEM\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity' 'Enabled' 0
+    Set-RegValue 'HKLM:\SYSTEM\CurrentControlSet\Control\Lsa' 'LsaCfgFlags' 0
 
     foreach ($f in $FeatureNames) { Set-OptionalFeature $f 'Disable' }
 
