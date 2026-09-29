@@ -37,10 +37,9 @@
 
 ## 环境准备（Windows 宿主机）
 
-在 Windows + VMware 上练习时，VBS/Hyper-V 会独占硬件虚拟化，导致虚机性能下降且无法启用
-嵌套虚拟化。使用 [scripts/VMware-VBS-Switch.ps1](scripts/VMware-VBS-Switch.ps1) 在
-“VMware 模式”与“系统安全模式”之间切换（需重启），详见
-[scripts/README.md](scripts/README.md)。
+在 Windows + VMware 上练习时，**按需关闭 VBS / Hyper-V**：宿主机若开着 VBS（基于虚拟化的安全）、
+内存完整性（HVCI）或 Hyper-V，硬件虚拟化会被它们占用，VMware 只能走兼容模式、虚机性能明显下降；
+关闭后需**重启宿主机**才生效。KTHW 本身不需要嵌套虚拟化。
 
 4 台 Debian 12 虚机的安装与配置步骤见
 [docs/zh/00-debian-install.md](docs/zh/00-debian-install.md)。
@@ -53,7 +52,6 @@
 | `docs/zh/` | 章节中文翻译（衍生作品，CC BY-NC-SA 4.0） |
 | `notes/` | 个人练习笔记（含踩坑、补充、验证记录） |
 | `reference/` | 术语表等参考资料 |
-| `scripts/` | 宿主机辅助脚本（如 VMware/VBS 切换），见 [scripts/README.md](scripts/README.md) |
 | `tools/` | 构建脚本（合成单文件 HTML），见 [tools/README.md](tools/README.md) |
 | `configs/` `units/` | 上游配置与 systemd unit 文件（Apache-2.0） |
 
