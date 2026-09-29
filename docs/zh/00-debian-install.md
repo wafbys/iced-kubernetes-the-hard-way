@@ -14,11 +14,12 @@
 ## 0. 宿主机准备（Windows + VMware）
 
 1. 确认 CPU 虚拟化已在 BIOS/UEFI 打开（Intel VT-x / AMD-V）。
-2. **先运行仓库里的切换脚本**，否则 Hyper-V/VBS 开启时 VMware 会走兼容模式、虚机性能明显下降：
-   ```powershell
-   pwsh -NoProfile -ExecutionPolicy Bypass -File .\scripts\VMware-VBS-Switch.ps1 vmware
-   ```
-   然后重启宿主机（详见 [scripts/README.md](../../scripts/README.md)）。
+2. **先运行仓库里的切换脚本**，否则 Hyper-V/VBS 开启时 VMware 会走兼容模式、虚机性能明显下降（脚本运行完需重启宿主机，详见 [scripts/README.md](../../scripts/README.md)）：
+
+```powershell
+pwsh -NoProfile -ExecutionPolicy Bypass -File .\scripts\VMware-VBS-Switch.ps1 vmware
+```
+
 3. 安装 VMware Workstation Pro（个人免费）或 Player。
 4. 下载 Debian 12 netinst ISO（amd64）：<https://www.debian.org/distrib/netinst>
    文件名形如 `debian-12.x.x-amd64-netinst.iso`（x86 宿主选 amd64；Apple/ARM 才选 arm64）。

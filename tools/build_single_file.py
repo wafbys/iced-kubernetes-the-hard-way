@@ -417,6 +417,7 @@ def main() -> None:
     theme_options = "\n    ".join(
         f'<option value="{tid}">{label}</option>' for tid, label, _ in THEMES
     )
+    theme_ids = "[" + ",".join(f'"{tid}"' for tid, _, _ in THEMES) + "]"
 
     doc = TEMPLATE.format(
         repo=REPO,
@@ -424,6 +425,7 @@ def main() -> None:
         toc=toc,
         themes=themes_css,
         theme_options=theme_options,
+        theme_ids=theme_ids,
         content="\n\n".join(chapters_html) + "\n\n" + g_html,
     )
     if not args.no_fonts:
@@ -584,7 +586,7 @@ blockquote p{{margin:.3em 0}}
   pre{{white-space:pre-wrap;word-break:break-word;box-shadow:none}}
 }}
 </style>
-<script>try{{var t=localStorage.getItem('kthw-theme');if(t)document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}</script>
+<script>try{{var ids={theme_ids};var q=new URLSearchParams(location.search).get('theme');var t=(q&&ids.indexOf(q)>=0)?q:localStorage.getItem('kthw-theme');if(t&&ids.indexOf(t)>=0)document.documentElement.setAttribute('data-theme',t);if(q&&ids.indexOf(q)>=0)localStorage.setItem('kthw-theme',q);}}catch(e){{}}</script>
 </head>
 <body>
 <div class="progress" id="progress"><span id="progressBar"></span></div>
@@ -660,13 +662,18 @@ blockquote p{{margin:.3em 0}}
   }});
 
   var themeSel = document.getElementById('theme');
+  var themeIds = {theme_ids};
   function applyTheme(t) {{
-    if (!t) return;
+    if (!t || themeIds.indexOf(t) < 0) return;
     document.documentElement.setAttribute('data-theme', t);
     if (themeSel) themeSel.value = t;
   }}
   var savedTheme = null;
-  try {{ savedTheme = localStorage.getItem('kthw-theme'); }} catch (e) {{}}
+  try {{
+    var q = null;
+    try {{ q = new URLSearchParams(location.search).get('theme'); }} catch (e) {{}}
+    savedTheme = (q && themeIds.indexOf(q) >= 0) ? q : localStorage.getItem('kthw-theme');
+  }} catch (e) {{}}
   applyTheme(savedTheme || 'anthropic');
   if (themeSel) {{
     themeSel.addEventListener('change', function () {{
